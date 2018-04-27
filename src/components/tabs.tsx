@@ -8,7 +8,7 @@ function tabs(workouts: {workouts: [{id: number, type: string, user_id: string, 
     left: 0,
     right: 0,
     top: 0,
-    elevation: -1
+    // paging: true
   });
   tabFolder.append(WorkoutTab(workouts));
   tabFolder.append(HistoryTab());

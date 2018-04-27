@@ -3,7 +3,8 @@ import History from '../history';
 
 function HistoryTab() {
   const tab = new Tab({
-    title: 'History'
+    title: 'History',
+    image: 'resources/list.png'
   });
   tab.append(History());
   return tab;

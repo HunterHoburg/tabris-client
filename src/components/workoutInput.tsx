@@ -1,14 +1,31 @@
-import {Button, Composite, TextView} from 'tabris';
+import {Button, Composite, TextView, RefreshComposite} from 'tabris';
 import NavigationView from "./navigation";
 import LogWorkoutPage from "./logWorkout";
+import WorkoutOptionsPage from './workoutOptions';
+import {API} from "../constants";
 
 function WorkoutInput(workoutObject: WorkoutObject) {
 
-  console.log(workoutObject);
-  const container = new Composite({
+  const container = new RefreshComposite({
     top: 0,
     left: 0,
     right: 0,
+  }).on({
+    refresh: () => {
+      fetch(API + '/workout/load', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
+      }).then(function(res) {
+        res.json().then(function(js) {
+          localStorage.setItem('workout_types', JSON.stringify(js));
+          makePage(js);
+          container.refreshIndicator = false;
+        })
+      })
+    }
   });
 
   function workoutTitle(title: string) {
@@ -22,9 +39,8 @@ function WorkoutInput(workoutObject: WorkoutObject) {
   function addWorkoutButton(workout: {type: string, title: string, id: number}) {
     return new Button({
       text: 'Log',
-      top: 'prev() -25',
-      right: 10,
-      alignment: 'right'
+      baseline: 'prev()',
+      right: 'prev() 10',
     }).on({
       select: () => {
         NavigationView.pages().dispose();
@@ -33,11 +49,33 @@ function WorkoutInput(workoutObject: WorkoutObject) {
     })
   }
 
-  for (let i = 0; i < workoutObject.workouts.length; i++) {
-    console.log(workoutObject.workouts[i].title);
-    container.append(workoutTitle(workoutObject.workouts[i].title))
-      .append(addWorkoutButton(workoutObject.workouts[i]))
+  function workoutOptionsButton(workout: Workout) {
+    return new Button({
+      text: 'Options',
+      baseline: 'prev()',
+      right: 10,
+    }).on({
+      select: () => {
+        // NavigationView.pages().dispose();
+        NavigationView.append(WorkoutOptionsPage(workout));
+      }
+    })
   }
+
+  function makePage(workoutObject: WorkoutObject) {
+    container.children().dispose();
+    for (let i = 0; i < workoutObject.workouts.length; i++) {
+      console.log(workoutObject.workouts[i].title);
+      container.append(workoutTitle(workoutObject.workouts[i].title))
+        .append(workoutOptionsButton(workoutObject.workouts[i]))
+        .append(addWorkoutButton(workoutObject.workouts[i]))
+      // .append(workoutOptionsModal(workoutObject.workouts[i]))
+    }
+  }
+
+  makePage(workoutObject);
+
+
   return container;
 }
 

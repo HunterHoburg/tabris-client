@@ -37,9 +37,6 @@ function logWorkout(workout: {type: string, title: string, id: number}) {
     textColor: 'white'
   }).on({
     select: () => {
-      console.log('submitted', weight.text);
-      console.log('workout type', workout);
-      console.log('workout title', workout.title);
       const newWorkout = {
         workout_id: workout.id,
         reps: reps.text || 0,
@@ -71,7 +68,8 @@ function logWorkout(workout: {type: string, title: string, id: number}) {
     textColor: 'white'
   }).on({
     select: () => {
-      console.log('hello');
+      NavigationView.pages().dispose();
+      NavigationView.append(Main());
     }
   }).appendTo(Tracker);
 

@@ -1,17 +1,13 @@
 import {Button, TextInput, Page, Picker} from 'tabris';
 import NavigationView from '../navigation';
 import Main from '../main';
-import {API} from '../../constants';
+import {API, workoutTypes} from '../../constants';
 
 
 function addWorkout() {
-  const workoutTypes = [
-    {id: 'body', title: 'Body Weight'},
-    {id: 'dumb', title: 'Dumbbell'},
-    {id: 'bar', title: 'Barbell'},
-  ];
+
   const Tracker = new Page({
-    title: 'Tracker'
+    title: 'Add New Workout Type'
   });
 
   const workoutName = new TextInput({
@@ -35,7 +31,9 @@ function addWorkout() {
   const submit = new Button({
     text: 'Create Workout',
     bottom: 10,
-    left: 10,
+    right: 10,
+    background: '#2b77db',
+    textColor: 'white',
   }).on({
     select: () => {
       const workout = {
@@ -57,6 +55,19 @@ function addWorkout() {
       }).catch(function(err) {
         console.log('ERROR', err);
       })
+      NavigationView.pages().dispose();
+      NavigationView.append(Main());
+    }
+  }).appendTo(Tracker);
+
+  const cancel = new Button({
+    text: 'Cancel',
+    bottom: 10,
+    left: 10,
+    background: '#D14036',
+    textColor: 'white'
+  }).on({
+    select: () => {
       NavigationView.pages().dispose();
       NavigationView.append(Main());
     }

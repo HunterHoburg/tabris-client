@@ -2,8 +2,9 @@ import {Tab} from 'tabris';
 import Workout from '../workout';
 
 function WorkoutTab(workouts: WorkoutObject) {
-  const tab = new Tab({
-    title: 'Workout'
+  let tab = new Tab({
+    title: 'Workout',
+    image: 'resources/dumbbell.png',
   });
   tab.append(Workout(workouts));
   return tab;

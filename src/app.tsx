@@ -1,10 +1,11 @@
 import {ui, TextView, CollectionView, Composite} from 'tabris';
 import NavigationView from './components/navigation';
 import MainPage from './components/main';
+import SplashPage from './components/splash';
 import SettingsPage from './components/settings';
 import AddWorkoutTypePage from './components/addWorkoutType';
 
-const pages = [{title: 'Main', target: MainPage}, {title: 'Add Workout', target: AddWorkoutTypePage}, {title: 'Settings', target: SettingsPage}];
+const pages = [{title: 'Workouts', target: MainPage}, {title: 'Add Workout', target: AddWorkoutTypePage}, {title: 'Settings', target: SettingsPage}];
 const drawer = ui.drawer;
 
 new CollectionView({
@@ -41,5 +42,5 @@ function updateCell(cell: any, index: number) {
 
 drawer.enabled = true;
 
-NavigationView.append(MainPage());
+NavigationView.append(SplashPage());
 
