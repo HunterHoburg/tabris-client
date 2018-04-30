@@ -49,14 +49,12 @@ function addWorkout() {
         body: JSON.stringify(workout)
       }).then(function(res) {
         const response = res.json().then(function(js) {
-          console.log(js);
+          NavigationView.pages().dispose();
+          NavigationView.append(Main());
         });
-        console.log('-=-=-=-', response);
       }).catch(function(err) {
         console.log('ERROR', err);
-      })
-      NavigationView.pages().dispose();
-      NavigationView.append(Main());
+      });
     }
   }).appendTo(Tracker);
 

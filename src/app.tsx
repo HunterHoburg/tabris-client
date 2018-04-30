@@ -9,8 +9,8 @@ const pages = [{title: 'Workouts', target: MainPage}, {title: 'Add Workout', tar
 const drawer = ui.drawer;
 
 new CollectionView({
-  left: 0,
-  top: 'prev()',
+  left: 10,
+  top: 'prev() 10',
   right: 0,
   bottom: 0,
   cellHeight: 40,

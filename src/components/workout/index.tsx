@@ -1,7 +1,7 @@
 import {Button, Composite, ScrollView} from 'tabris';
 import NavigationView from '../navigation';
 import AddWorkoutTypePage from '../addWorkoutType';
-import WorkoutInput from '../workoutInput';
+import WorkoutList from '../workoutList/index';
 
 function workout(workoutObject: WorkoutObject) {
 
@@ -13,11 +13,14 @@ function workout(workoutObject: WorkoutObject) {
     direction: 'vertical'
   });
 
-  workoutView.append(WorkoutInput(workoutObject))
+  workoutView.append(WorkoutList(workoutObject))
     .append(new Button({
     text: 'Add Workout',
     bottom: 10,
-    right: 10
+    right: 10,
+    left: 10,
+    background: '#2b77db',
+    textColor: 'white'
   }).on({
     select: () => {
       NavigationView.pages().dispose();

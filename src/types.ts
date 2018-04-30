@@ -12,7 +12,6 @@ interface WorkoutObject {
 interface Workout {
   id: number,
   type: string,
-  user_id: string,
   title: string,
 }
 

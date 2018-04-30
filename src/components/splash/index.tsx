@@ -1,4 +1,4 @@
-import {Page, TextView, ImageView, device, Button, ui} from 'tabris';
+import {Page, TextView, ImageView, device, Button} from 'tabris';
 import NavigationView from '../navigation';
 import MainPage from '../main';
 import {API} from '../../constants';
@@ -7,10 +7,9 @@ function splash() {
 
   let workouts;
 
-  ui.navigationBar.displayMode = 'hide';
+  NavigationView.toolbarVisible = false;
 
   const Splash = new Page( {
-    title: 'Splash'
   }).on({
     appear: () => {
       fetch(API + '/workout/load', {
@@ -26,13 +25,19 @@ function splash() {
           Splash.append(new ImageView({
             image: 'resources/splash.jpg',
             background: '#aaaaaa',
-            width: device.screenWidth * 1.2,
+            width: device.screenWidth,
+            centerX: 0,
             scaleMode: 'fit',
           })).append(new TextView({
             text: 'WORKOUT APP',
-            font: 'bold 24px',
+            font: 'bold 30px',
             centerX: 0,
             bottom: 150,
+            textColor: 'white'
+          })).append(new TextView({
+            text: 'Something inspirational goes here',
+            centerX: 0,
+            bottom: 130,
             textColor: 'white'
           })).append(new Button({
             text: 'Get Started',

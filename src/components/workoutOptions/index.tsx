@@ -33,6 +33,8 @@ function WorkoutInput(workout: Workout) {
     bottom: 10,
     left: 10,
     right: 10,
+    background: '#2b77db',
+    textColor: 'white',
     // enabled: (workout.title !== workoutName.text) || (workout.type !== workoutTypes[workoutType.selectionIndex].title)
   }).on({
     select: () => {
@@ -60,7 +62,8 @@ function WorkoutInput(workout: Workout) {
     bottom: 'prev() 10',
     left: 10,
     right: 10,
-    textColor: '#D14036'
+    background: '#D14036',
+    textColor: 'white'
   }).on({
     select: () => {
       fetch(API +'/workout/delete?workout_id=' + workout.id, {

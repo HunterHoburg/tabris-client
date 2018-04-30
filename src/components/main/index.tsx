@@ -1,9 +1,10 @@
 import {Page} from 'tabris';
 import Tabs from '../tabs';
+import NavigationView from "../navigation";
 
 function main() {
 
-  let workouts;
+  NavigationView.toolbarVisible = true;
 
   const Main = new Page( {
     title: 'Workouts'

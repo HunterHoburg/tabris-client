@@ -3,7 +3,6 @@ import {API} from '../../constants';
 import NavigationView from '../navigation';
 import Main from '../main';
 
-
 function logWorkout(workout: {type: string, title: string, id: number}) {
   const Tracker = new Page({
     title: 'Tracker'
@@ -16,7 +15,7 @@ function logWorkout(workout: {type: string, title: string, id: number}) {
     keyboard: 'number',
     top: 10,
     left: 10,
-    right: 10
+    right: 10,
   }).appendTo(Tracker);
 
   const weight = new TextInput({
@@ -26,7 +25,7 @@ function logWorkout(workout: {type: string, title: string, id: number}) {
     keyboard: 'number',
     top: 'prev() 10',
     left: 10,
-    right: 10
+    right: 10,
   }).appendTo(Tracker);
 
   const submit = new Button({
@@ -34,7 +33,7 @@ function logWorkout(workout: {type: string, title: string, id: number}) {
     bottom: 10,
     right: 10,
     background: '#2b77db',
-    textColor: 'white'
+    textColor: 'white',
   }).on({
     select: () => {
       const newWorkout = {
@@ -43,7 +42,7 @@ function logWorkout(workout: {type: string, title: string, id: number}) {
         weight: weight.text || 0,
         type: workout.type,
         title: workout.title,
-      }
+      };
       fetch(API + '/workout/log', {
         headers: {
           'Accept': 'application/json',
@@ -65,7 +64,7 @@ function logWorkout(workout: {type: string, title: string, id: number}) {
     bottom: 10,
     left: 10,
     background: '#d14036',
-    textColor: 'white'
+    textColor: 'white',
   }).on({
     select: () => {
       NavigationView.pages().dispose();

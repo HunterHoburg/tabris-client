@@ -1,10 +1,10 @@
 import {Button, Composite, TextView, RefreshComposite} from 'tabris';
-import NavigationView from "./navigation";
-import LogWorkoutPage from "./logWorkout";
-import WorkoutOptionsPage from './workoutOptions';
-import {API} from "../constants";
+import NavigationView from "../navigation";
+import LogWorkoutPage from "../logWorkout/index";
+import WorkoutOptionsPage from '../workoutOptions/index';
+import {API} from "../../constants";
 
-function WorkoutInput(workoutObject: WorkoutObject) {
+function Index(workoutObject: WorkoutObject) {
 
   const container = new RefreshComposite({
     top: 0,
@@ -13,10 +13,6 @@ function WorkoutInput(workoutObject: WorkoutObject) {
   }).on({
     refresh: () => {
       fetch(API + '/workout/load', {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
         method: 'GET',
       }).then(function(res) {
         res.json().then(function(js) {
@@ -41,6 +37,8 @@ function WorkoutInput(workoutObject: WorkoutObject) {
       text: 'Log',
       baseline: 'prev()',
       right: 'prev() 10',
+      background: '#2b77db',
+      textColor: 'white',
     }).on({
       select: () => {
         NavigationView.pages().dispose();
@@ -56,7 +54,6 @@ function WorkoutInput(workoutObject: WorkoutObject) {
       right: 10,
     }).on({
       select: () => {
-        // NavigationView.pages().dispose();
         NavigationView.append(WorkoutOptionsPage(workout));
       }
     })
@@ -65,11 +62,9 @@ function WorkoutInput(workoutObject: WorkoutObject) {
   function makePage(workoutObject: WorkoutObject) {
     container.children().dispose();
     for (let i = 0; i < workoutObject.workouts.length; i++) {
-      console.log(workoutObject.workouts[i].title);
       container.append(workoutTitle(workoutObject.workouts[i].title))
         .append(workoutOptionsButton(workoutObject.workouts[i]))
         .append(addWorkoutButton(workoutObject.workouts[i]))
-      // .append(workoutOptionsModal(workoutObject.workouts[i]))
     }
   }
 
@@ -79,4 +74,4 @@ function WorkoutInput(workoutObject: WorkoutObject) {
   return container;
 }
 
-export default WorkoutInput;
+export default Index;

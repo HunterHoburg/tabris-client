@@ -4,8 +4,6 @@ export default function historyTable(workoutDate: WorkoutDate) {
 
   const date = new Date(workoutDate.date);
 
-  console.log(date);
-
   return new Composite({
     left: 10,
     top: 'prev()',
