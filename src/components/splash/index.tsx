@@ -5,23 +5,16 @@ import {API} from '../../constants';
 
 function splash() {
 
-  let workouts;
-
   NavigationView.toolbarVisible = false;
 
   const Splash = new Page( {
   }).on({
     appear: () => {
       fetch(API + '/workout/load', {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
         method: 'GET',
       }).then(function(res) {
         res.json().then(function(js) {
-          workouts = js;
-          localStorage.setItem('workout_types', JSON.stringify(workouts));
+          localStorage.setItem('workout_types', JSON.stringify(js));
           Splash.append(new ImageView({
             image: 'resources/splash.jpg',
             background: '#aaaaaa',

@@ -1,4 +1,4 @@
-import {Button, Composite, TextView, RefreshComposite} from 'tabris';
+import {Button, TextView, RefreshComposite} from 'tabris';
 import NavigationView from "../navigation";
 import LogWorkoutPage from "../logWorkout/index";
 import WorkoutOptionsPage from '../workoutOptions/index';
@@ -10,9 +10,14 @@ function Index(workoutObject: WorkoutObject) {
     top: 0,
     left: 0,
     right: 0,
+    bottom: 0,
   }).on({
     refresh: () => {
       fetch(API + '/workout/load', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
         method: 'GET',
       }).then(function(res) {
         res.json().then(function(js) {
@@ -69,7 +74,6 @@ function Index(workoutObject: WorkoutObject) {
   }
 
   makePage(workoutObject);
-
 
   return container;
 }
